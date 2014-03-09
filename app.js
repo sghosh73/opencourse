@@ -3,6 +3,8 @@ var path = require('path');
 var http = require('http');
 
 var passport = require('passport');
+var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(express);
 
 var accountController = require('./controllers/accountController');
 
@@ -14,31 +16,43 @@ var secrets = require('./config/secrets');
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
+app.use(express.cookieParser()); 
+app.use(express.bodyParser()); 
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*
 mongoose.connect(secrets.db);
 mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.');
 });
+*/
 
 app.get('/', function(req, res) {
-	res.render('home', {title: 'home'});
+	res.render('home.html', {title: 'home'});
 });
 app.get('/search', function(req, res) {
-	res.render('search', {title: 'search'});
+	res.render('search.html', {title: 'search'});
 });
 app.get('/course', function(req, res) {
-	res.render('course', {title: 'course'});
+	res.render('course.html', {title: 'course'});
 });
+
 app.get('/auth/venmo', passport.authorize('venmo', { scope: 'make_payments access_profile access_balance access_email access_phone' }));
 app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '/' }), function(req, res) {
   res.redirect('/');
 });
+
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated())
+		return next();
+	res.redirect('/');
+}
 
 //server
 http.createServer(app).listen(app.get('port'), function() {
