@@ -1,5 +1,4 @@
 var _ = require('underscore');
-var FacebookStrategy = require('passport-facebook').Strategy;
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var User       		= require('../models/user');
 var passport = require('passport');
@@ -17,14 +16,14 @@ passport.deserializeUser(function(id, done) {
 
 passport.use('venmo', new OAuth2Strategy({
     authorizationURL: 'https://api.venmo.com/v1/oauth/authorize',
-    tokenURL: 'https://api.venmo.com/v1/oauth/access_token',
+    tokenURL: 'https://api.venmo.com/v1/oauth/x8gqFg7quQbVtpcMafuPMQzAH7dW3esA',
     clientID: secrets.venmo.clientId,
     clientSecret: secrets.venmo.clientSecret,
     callbackURL: secrets.venmo.redirectUrl,
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
-    User.findById(req.user.id, function(err, user) {
+    User.findById(req.user._id, function(err, user) {
       user.tokens.push({ kind: 'venmo', accessToken: accessToken });
       user.save(function(err) {
         done(err, user);
