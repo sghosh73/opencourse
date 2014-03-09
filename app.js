@@ -4,7 +4,6 @@ var http = require('http');
 
 var passport = require('passport');
 
-var homeController = require('./controllers/homeController');
 var accountController = require('./controllers/accountController');
 
 var passportConfig = require('./config/passport');
@@ -27,7 +26,15 @@ mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.');
 });
 
-app.get('/', homeController.index);
+app.get('/', function(req, res) {
+	res.render('home', {title: 'home'});
+});
+app.get('/search', function(req, res) {
+	res.render('search', {title: 'search'});
+});
+app.get('/course', function(req, res) {
+	res.render('course', {title: 'course'});
+});
 app.get('/auth/venmo', passport.authorize('venmo', { scope: 'make_payments access_profile access_balance access_email access_phone' }));
 app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '/' }), function(req, res) {
   res.redirect('/');
