@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/venmo-example');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback () {
-  console.log("mongoose connection is open")
-});
+//mongoose.connect('mongodb://localhost/venmo-example');
+//var db = mongoose.connection;
+//db.on('error', console.error.bind(console, 'connection error:'));
+//db.once('open', function callback () {
+  //console.log("mongoose connection is open")
+//});
 
 var Schema = mongoose.Schema,
     crypto = require('crypto');

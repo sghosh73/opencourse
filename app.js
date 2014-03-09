@@ -3,6 +3,7 @@ var path = require('path');
 var http = require('http');
 
 var passport = require('passport');
+var request = require('request');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(express);
 var expressValidator = require('express-validator');
@@ -18,6 +19,7 @@ var app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
+//app.engine('html', require('ejs').renderFile);
 
 app.use(express.bodyParser()); 
 app.use(express.favicon());
@@ -50,24 +52,13 @@ app.get('/course', function(req, res) {
 	res.render('course.html', {title: 'course'});
 });
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
+app.get('/venmo/login', function(req, res) {
+	res.redirect("https://api.venmo.com/v1/oauth/authorize?client_id=1641&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code");
 });
-
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect(req.session.returnTo || '/');
+app.get('/auth/venmo/callback', function(req, res) {
+	res.redirect("https://api.venmo.com/v1/oauth/authorize?client_id=1641&scope=make_payments%20access_profile%20access_email%20access_phone%20access_balance&response_type=code");
+	console.log(req.query.code);
 });
-pp.get('/auth/venmo', passport.authenticate('venmo', {
-    scope: ['make_payments', 'access_feed', 'access_profile', 'access_email', 'access_phone', 'access_balance', 'access_friends'],
-    failureRedirect: '/'
-}));
-
-app.get('/auth/venmo/callback', passport.authenticate('venmo', {
-    failureRedirect: '/'
-}));
-
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())

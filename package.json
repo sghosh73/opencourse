@@ -25,6 +25,7 @@
     "bcrypt-nodejs": "latest",
     "handlebars": "latest",
     "passport-venmo": "latest",
-    "stripe": "latest"
+    "stripe": "latest",
+    "request": "latest"
   }
 }
