@@ -10,8 +10,8 @@ module.exports = {
   	},
 
   	 venmo: {
-    	clientId: 'Your Venmo Client ID',
-    	clientSecret: 'Your Venmo Client Secret',
-    	redirectUrl: 'http://localhost:3000/auth/venmo/callback'
+    	clientId: '1641',
+    	clientSecret: 'rry2y9CrFrTTvqbYfjmDXrUpp74YsE6P',
+    	redirectUrl: 'http://localhost:3000/auth/venmo'
   },
 };
