@@ -23,7 +23,7 @@ passport.use('venmo', new OAuth2Strategy({
     callbackURL: secrets.venmo.redirectUrl,
     passReqToCallback: true
   },
-));
+)};
 
 passport.use(new FacebookStrategy(secrets.facebook, function(req, accessToken, refreshToken, profile, done) {
   if (req.user) {
