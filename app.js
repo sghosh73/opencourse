@@ -27,23 +27,16 @@ app.use(express.methodOverride());
 app.use(express.cookieParser());
 app.use(express.json());
 app.use(expressValidator());
-app.use(express.csrf());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) {
-  res.locals.user = req.user;
-  res.locals.token = req.csrfToken();
-  res.locals.secrets = secrets;
-  next();
-});
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*
+
 mongoose.connect(secrets.db);
 mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.');
 });
-*/
+
 
 app.get('/', function(req, res) {
 	res.render('home.html', {title: 'home'});
