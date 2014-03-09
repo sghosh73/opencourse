@@ -12,6 +12,6 @@ module.exports = {
   	 venmo: {
     	clientId: '1641',
     	clientSecret: 'rry2y9CrFrTTvqbYfjmDXrUpp74YsE6P',
-    	redirectUrl: 'http://localhost:3000/auth/venmo'
+    	redirectUrl: 'http://young-river-6185.herokuapp.com/auth/venmo/callback'
   },
 };
