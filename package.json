@@ -1,0 +1,17 @@
+{
+  "name": "hirely",
+  "description": "find employees from dead/acquired companies",
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.3.x"
+  },
+  "dependencies": {
+    "express": "~3.4.7",
+    "mustache": "latest",
+    "crypto": "0.0.3",
+    "passport": "~0.1.18",
+    "passport-facebook": "latest",
+    "nodemailer": "latest"
+  }
+}
