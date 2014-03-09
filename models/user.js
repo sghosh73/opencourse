@@ -1,39 +1,35 @@
 var mongoose = require('mongoose');
-var bcrypt   = require('bcrypt-nodejs');
-
-// define the schema for our user model
-var userSchema = mongoose.Schema({
-    facebook         : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    },
-
-    tokens: Array,
-
-  	profile: {
-    	name: { type: String, default: '' },
-    	gender: { type: String, default: '' },
-    	location: { type: String, default: '' },
-    	website: { type: String, default: '' },
-    	picture: { type: String, default: '' }
-  	},
-
-  	resetPasswordToken: String,
-  	resetPasswordExpires: Date
+mongoose.connect('mongodb://localhost/venmo-example');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("mongoose connection is open")
 });
 
-// methods ======================
-// generating a hash
-userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
+var Schema = mongoose.Schema,
+    crypto = require('crypto');
 
-// checking if password is valid
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
-};
+/**
+ * User Schema
+ */
+var UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: String,
+    username: {
+        type: String,
+        unique: true
+    },
+    balance: String,
+    provider: String,
+    salt: String,
+    venmo: {},
+    access_token: String,
+    refresh_token: String
+});
 
-// create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);
+var User = mongoose.model('User', UserSchema);
+
+module.exports = {"User": User};

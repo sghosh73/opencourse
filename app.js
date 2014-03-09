@@ -59,10 +59,15 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', '
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
   res.redirect(req.session.returnTo || '/');
 });
-app.get('/auth/venmo', passport.authorize('venmo', { scope: 'make_payments access_profile access_balance access_email access_phone' }));
-app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '/course' }), function(req, res) {
-  res.redirect('/course');
-});
+pp.get('/auth/venmo', passport.authenticate('venmo', {
+    scope: ['make_payments', 'access_feed', 'access_profile', 'access_email', 'access_phone', 'access_balance', 'access_friends'],
+    failureRedirect: '/'
+}));
+
+app.get('/auth/venmo/callback', passport.authenticate('venmo', {
+    failureRedirect: '/'
+}));
+
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())

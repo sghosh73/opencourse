@@ -23,6 +23,7 @@
     "express-validator": "latest",
     "ejs": "latest",
     "bcrypt-nodejs": "latest",
-    "handlebars": "latest"
+    "handlebars": "latest",
+    "passport-venmo": "latest"
   }
 }

@@ -22,8 +22,7 @@ passport.use('venmo', new OAuth2Strategy({
     clientSecret: secrets.venmo.clientSecret,
     callbackURL: secrets.venmo.redirectUrl,
     passReqToCallback: true
-  },
-  function(req, accessToken, refreshToken, profile, done) {
+    function(req, accessToken, refreshToken, profile, done) {
     User.findById(req.user._id, function(err, user) {
       user.tokens.push({ kind: 'venmo', accessToken: accessToken });
       user.save(function(err) {
@@ -31,7 +30,7 @@ passport.use('venmo', new OAuth2Strategy({
       });
     });
   }
-));
+}));
 
 passport.use(new FacebookStrategy(secrets.facebook, function(req, accessToken, refreshToken, profile, done) {
   if (req.user) {
