@@ -24,7 +24,7 @@ passport.use('venmo', new OAuth2Strategy({
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
-    User.findById(req.user._id, function(err, user) {
+    User.findById(req.user.id, function(err, user) {
       user.tokens.push({ kind: 'venmo', accessToken: accessToken });
       user.save(function(err) {
         done(err, user);
