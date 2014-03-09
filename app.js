@@ -60,7 +60,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRe
   res.redirect(req.session.returnTo || '/');
 });
 app.get('/auth/venmo', passport.authorize('venmo', { scope: 'make_payments access_profile access_balance access_email access_phone' }));
-app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: 'course' }), function(req, res) {
+app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '/course' }), function(req, res) {
   res.redirect('/course');
 });
 
