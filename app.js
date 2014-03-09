@@ -18,7 +18,6 @@ var app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-//app.engine('html', require('ejs').renderFile);
 
 app.use(express.bodyParser()); 
 app.use(express.favicon());
