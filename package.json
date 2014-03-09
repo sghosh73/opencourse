@@ -22,6 +22,7 @@
     "validator": "latest",
     "express-validator": "latest",
     "ejs": "latest",
-    "bcrypt-nodejs": "latest"
+    "bcrypt-nodejs": "latest",
+    "handlebars": "latest"
   }
 }
