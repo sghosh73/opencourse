@@ -17,7 +17,7 @@ passport.deserializeUser(function(id, done) {
 
 passport.use('venmo', new OAuth2Strategy({
     authorizationURL: 'https://api.venmo.com/v1/oauth/authorize',
-    tokenURL: 'https://api.venmo.com/v1/oauth/access_token',
+    tokenURL: 'https://api.venmo.com/v1/oauth/x8gqFg7quQbVtpcMafuPMQzAH7dW3esA',
     clientID: secrets.venmo.clientId,
     clientSecret: secrets.venmo.clientSecret,
     callbackURL: secrets.venmo.redirectUrl,
