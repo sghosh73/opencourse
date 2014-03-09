@@ -7,4 +7,5 @@ $(document).ready(function () {
             window.location = "/views/search.html#" + $('input').val();
         }
     });
+    $('.dropdown-menu').css('width', "500px");
 });
