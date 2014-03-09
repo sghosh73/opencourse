@@ -10,4 +10,8 @@ $(document).ready(function () {
             scrollTop: $('#lecture' + id).offset().top
         }, 600);
     });
+
+    $('.btn-pay').click(function (e) {
+        $(this).tab('show')
+    })
 });

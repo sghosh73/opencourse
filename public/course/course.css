@@ -8,4 +8,14 @@
 }
 .course-container {
     background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.locked-content {
+    height: 300px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .8);
+}
+.btn-pay {
+    margin-top: 10px;
 }
