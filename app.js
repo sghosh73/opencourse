@@ -5,6 +5,7 @@ var http = require('http');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(express);
+var expressValidator = require('express-validator');
 
 var accountController = require('./controllers/accountController');
 
@@ -18,12 +19,23 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
-app.use(express.cookieParser()); 
 app.use(express.bodyParser()); 
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
+app.use(express.json());
+app.use(expressValidator());
+app.use(express.csrf());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  res.locals.token = req.csrfToken();
+  res.locals.secrets = secrets;
+  next();
+});
 app.use(express.static(path.join(__dirname, 'public')));
 
 /*
@@ -43,9 +55,9 @@ app.get('/course', function(req, res) {
 	res.render('course.html', {title: 'course'});
 });
 
-app.get('/auth/venmo', passport.authorize('venmo', { scope: 'make_payments access_profile access_balance access_email access_phone' }));
-app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '/' }), function(req, res) {
-  res.redirect('/');
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
+  res.redirect(req.session.returnTo || '/');
 });
 
 function isLoggedIn(req, res, next) {

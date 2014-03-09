@@ -20,6 +20,7 @@
     "nodemailer": "latest",
     "underscore": "latest",
     "validator": "latest",
+    "express-validator": "latest",
     "ejs": "latest",
     "bcrypt-nodejs": "latest"
   }
