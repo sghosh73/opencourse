@@ -19,10 +19,12 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 //app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'handlebars');
+
 app.use(express.bodyParser()); 
 app.use(express.favicon());
 app.use(express.logger('dev'));
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser());
@@ -32,12 +34,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+/*
 mongoose.connect(secrets.db);
 mongoose.connection.on('error', function() {
   console.error('✗ MongoDB Connection Error. Please make sure MongoDB is running.');
 });
-
+*/
 
 app.get('/', function(req, res) {
 	res.render('home.html', {title: 'home'});

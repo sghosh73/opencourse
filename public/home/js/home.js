@@ -4,7 +4,7 @@ $(document).ready(function () {
     });
     $("input").keyup(function (e) {
         if (e.keyCode == 13) {
-            window.location = "/views/search.html#" + $('input').val();
+            window.location = "search";
         }
     });
     $('.dropdown-menu').css('width', "500px");
