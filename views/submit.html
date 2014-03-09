@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Submit A Lecture</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS for the '3 Col Portfolio' Template -->
+    <link href="public/submit/css/portfolio-item.css" rel="stylesheet">
+
+    <!-- Dropzone -->
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="l3i9pajxwwiu44p"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://startbootstrap.com">Start Bootstrap</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+        <br/>
+        <br/>
+        <br/>
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">Create a Lecture
+                </h1>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Link To Video</h3>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="input-group input-group-md">
+                    <span class="input-group-addon">Youtube:</span>
+                    <input type="text" class="form-control" placeholder="http://">
+                </div>
+
+                <div class="col-lg-6">
+
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h3 class="page-header">Video Details</h3>
+            </div>
+
+            <div class="col-xs-6">
+                <div class="input-group input-group-md">
+                    <span class="input-group-addon">Topic</span>
+                    <input type="text" class="form-control" placeholder="Enter a Topic">
+                </div>
+
+                <div class="col-lg-6">
+
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <select class="form-control">
+                    <option>Choose a Category</option>
+                    <option>Math</option>
+                    <option>Science</option>
+                    <option>Economics and Finance</option>
+                    <option>Humanities</option>
+                    <option>Test Prep</option>
+                    <option>Technology</option>
+                </select>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div class="col-xs-12">
+                <textarea class="form-control" rows="3" placeholder="Enter your lecture description here"></textarea>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div class="col-lg-12">
+                <h3 class="page-header">Lecture Materials</h3>
+            </div>
+            <br/>
+            <div id="dropbox-btn"></div>
+            <br/>
+            <br/>
+            <div class="col-xs-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="">I accept the Terms and Conditions</input>
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <button class="btn btn-default btn-success btn-lg pull-right">Submit
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+
+            </div>
+
+
+        </div>
+        <!-- /.container -->
+
+        <div class="container">
+
+            <hr>
+
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Company 2013</p>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- /.container -->
+
+        <!-- JavaScript -->
+        <script src="js/jquery-1.10.2.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script>
+            options = {
+        
+            // Required. Called when a user selects an item in the Chooser.
+            success: function(files) {
+                alert("Here's the file link: " + files[0].link)
+            },
+        
+            // Optional. Called when the user closes the dialog without selecting a file
+            // and does not include any parameters.
+            cancel: function() {
+        
+            },
+
+            linkType: "direct", // or "direct"
+            multiselect: true, // or true
+        };
+            var button = Dropbox.createChooseButton(options);
+            document.getElementById("dropbox-btn").appendChild(button);
+        </script>
+
+</body>
+
+</html>
